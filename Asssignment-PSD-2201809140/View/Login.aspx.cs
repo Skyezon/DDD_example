@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Asssignment_PSD_2201809140.Model;
 using Asssignment_PSD_2201809140.Repository;
 
 namespace Asssignment_PSD_2201809140.View
@@ -29,19 +30,26 @@ namespace Asssignment_PSD_2201809140.View
 
             }
             errorMessage.Visible = false;
+            bannedMessage.Visible = false;
         }
 
         protected void loginButton_Click(object sender, EventArgs e)
         {
             String emailInput = emailLogin.Text;
             String passwordInput = passwordLogin.Text;
+
+            Users user = AccountRepository.findUser(emailInput, passwordInput);
+
             if (AccountRepository.ifCredNull(emailInput,passwordInput))
             {
                 errorMessage.Visible = true;
+            }else if (!user.Status.Equals("allowed"))
+            {
+                bannedMessage.Visible = true;
             }
             else
             {
-                Session["SessionAuthUser"] = AccountRepository.findUser(emailInput, passwordInput);
+                Session["SessionAuthUser"] = user;
                 if (rememberMeCheckBox.Checked)
                 {
                     Response.Cookies["authUserEmailCookie"].Value = emailInput;

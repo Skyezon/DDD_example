@@ -5,6 +5,7 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label runat="server" ID="errorMessage" Text="Inccorect Email or password Combination" CssClass="alert-danger"></asp:Label>
+    <asp:Label runat="server" ID="bannedMessage" Text="You are banned from this application" CssClass="alert-danger"></asp:Label>
     <form>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>

@@ -103,7 +103,7 @@ namespace Asssignment_PSD_2201809140.View.Product
             {
 
                 ProductRepository.UpdateProduct(productName,productStock,productPrice,old);
-                Response.Redirect(Request.UrlReferrer.ToString());
+                Response.Redirect("ViewProduct.aspx");
             }
             else
             {

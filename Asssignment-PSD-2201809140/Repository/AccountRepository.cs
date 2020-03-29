@@ -69,5 +69,6 @@ namespace Asssignment_PSD_2201809140.Repository
             tokbedDb.Users.Add(newUser);
             tokbedDb.SaveChanges();
         }
+
     }
 }
