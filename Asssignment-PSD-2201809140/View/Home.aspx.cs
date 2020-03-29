@@ -113,9 +113,11 @@ namespace Asssignment_PSD_2201809140.View
 
         protected void loadListProduct()
         {
+            
              Random rand = new Random();
              List<Products> tampilanProduct = new List<Products>();
              List<Products> kumpulanProduct = ProductRepository.GetProductList();
+             Console.WriteLine(kumpulanProduct);
              if (kumpulanProduct.Count < 5)
              {
                  productList.DataSource = kumpulanProduct;
@@ -125,14 +127,23 @@ namespace Asssignment_PSD_2201809140.View
              {
                 for (int i = 0; i < 5; i++)
                 {
-                    int index = rand.Next(kumpulanProduct.Count);
-                    Products pilihan = kumpulanProduct.Find(item => item.Id == index);
+                    int index = 1;
+                    Products pilihan = new Products();
+                 
+                        index = (int)rand.Next(0, kumpulanProduct.Count-1);
+                        pilihan = kumpulanProduct[index];
+              
+                    System.Diagnostics.Debug.WriteLine(pilihan.Name);
                     tampilanProduct.Add(pilihan);
-                    kumpulanProduct.RemoveAt(index);
+                    kumpulanProduct.Remove(pilihan);
+                    System.Diagnostics.Debug.WriteLine("jalan index ke " + index);
                 }
                 productList.DataSource = tampilanProduct;
+                foreach (Products satu in tampilanProduct)
+                {
+                    System.Diagnostics.Debug.WriteLine(satu.Name);
+                }
             }
-            
              productList.DataBind();
         }
 

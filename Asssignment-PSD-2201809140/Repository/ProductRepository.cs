@@ -33,11 +33,17 @@ namespace Asssignment_PSD_2201809140.Repository
            tokbedDb.SaveChanges();
         }
 
-        public static void DeleteProduct(Products targetProduct)
+        public static void DeleteProduct(int id)
         {
-           Products dapat = tokbedDb.Products.Find(targetProduct.Id);
-           tokbedDb.Products.Remove(targetProduct);
+            Products dapat = FindProduct(id);
+           tokbedDb.Products.Remove(dapat);
            tokbedDb.SaveChanges();
+        }
+
+        public static Products FindProduct(int id)
+        {
+            Products dapat = (Products) tokbedDb.Products.Find(id);
+            return dapat;
         }
 
     }

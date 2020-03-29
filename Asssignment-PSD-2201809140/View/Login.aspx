@@ -22,6 +22,5 @@
             <asp:CheckBox runat="server" ID="rememberMeCheckBox" Text="Remember me"/>
             <asp:Button runat="server" ID="loginButton" CssClass="btn btn-primary" Text="Login" OnClick="loginButton_Click"/>
         </div>
-        
     </form>
 </asp:Content>
