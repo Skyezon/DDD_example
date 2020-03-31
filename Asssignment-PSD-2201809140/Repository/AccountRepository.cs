@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 using Asssignment_PSD_2201809140.Model;
+using Microsoft.Ajax.Utilities;
 
 namespace Asssignment_PSD_2201809140.Repository
 {
@@ -19,7 +21,7 @@ namespace Asssignment_PSD_2201809140.Repository
             Users dapat =  tokbedDb.Users.Find(lama.Id);
             dapat.Email = email;
             dapat.Name = name;
-            dapat.Gender = name;
+            dapat.Gender = gender;
             tokbedDb.SaveChanges();
 
         }
@@ -38,10 +40,39 @@ namespace Asssignment_PSD_2201809140.Repository
             return user;
         }
 
+        public static void ToggleStatus(int id)
+        {
+            Users user = tokbedDb.Users.Find(id);
+            if (user.Status.Equals("active"))
+            {
+                user.Status = "blocked";
+            }
+            else
+            {
+                user.Status = "active";
+            }
+                
+            tokbedDb.SaveChanges();
+
+        }
+
+        public static void ToogleRole(int id)
+        {
+            Users user = tokbedDb.Users.Where(satu => satu.Id == id).FirstOrDefault();
+            if (user.RoleId == 1)
+            {
+                user.RoleId = 2;
+            }
+            else
+            {
+                user.RoleId = 1;
+            }
+        }
+
         public static bool ifCredNull(String email, String password)
         {
             Users user = findUser(email,password);
-            if (user.Name == null || user.Password == null)
+            if (user == null)
             {
                 return true;
             }

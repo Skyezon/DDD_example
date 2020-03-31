@@ -15,8 +15,6 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
-
     </asp:GridView>
-    
     <asp:Button runat="server" ID="insertProductButton" OnClick="insertProductButton_Click" Text="Insert Product"/>
 </asp:Content>

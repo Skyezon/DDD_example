@@ -23,11 +23,7 @@ namespace Asssignment_PSD_2201809140.View
 
             if (sessionUser == null)
             {
-                username.Text = "Guest";
-                viewProductButton.Visible = true;
-                viewProfileButton.Visible = false;
-                logoutButton.Visible = false;
-
+         
                 viewUserButton.Visible = false;
                 insertProductButton.Visible = false;
                 updateProductButton.Visible = false;
@@ -38,11 +34,7 @@ namespace Asssignment_PSD_2201809140.View
             }
             else if (sessionUser.Roles.Name.Equals("member") || sessionUser.Roles.Name.Equals("admin"))
             {
-                username.Text = sessionUser.Name;
-                viewProductButton.Visible = true;
-                viewProfileButton.Visible = true;
-                logoutButton.Visible = true;
-                loginButton.Visible = false;
+       
 
                 viewUserButton.Visible = false;
                 insertProductButton.Visible = false;
@@ -82,7 +74,7 @@ namespace Asssignment_PSD_2201809140.View
 
         protected void viewProductTypeButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Product/ViewProduct.aspx");
+            Response.Redirect("ProductType/ViewProductType.aspx");
         }
 
         protected void insertProductTypeButton_Click(object sender, EventArgs e)
@@ -95,21 +87,7 @@ namespace Asssignment_PSD_2201809140.View
             Response.Redirect("ProductType/UpdateProductType.aspx");
         }
 
-        protected void viewProductButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Product/ViewProduct.aspx");
-        }
-
-        protected void viewProfileButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Account/Profile.aspx");
-        }
-
-        protected void logoutButton_Click(object sender, EventArgs e)
-        {
-            Session.RemoveAll();
-            Response.Redirect("Home.aspx");
-        }
+      
 
         protected void loadListProduct()
         {
@@ -130,26 +108,20 @@ namespace Asssignment_PSD_2201809140.View
                     int index = 1;
                     Products pilihan = new Products();
                  
+                        
                         index = (int)rand.Next(0, kumpulanProduct.Count-1);
                         pilihan = kumpulanProduct[index];
               
-                    System.Diagnostics.Debug.WriteLine(pilihan.Name);
                     tampilanProduct.Add(pilihan);
                     kumpulanProduct.Remove(pilihan);
-                    System.Diagnostics.Debug.WriteLine("jalan index ke " + index);
+                    
                 }
                 productList.DataSource = tampilanProduct;
-                foreach (Products satu in tampilanProduct)
-                {
-                    System.Diagnostics.Debug.WriteLine(satu.Name);
-                }
+                
             }
              productList.DataBind();
         }
 
-        protected void loginButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Login.aspx");
-        }
+        
     }
 }

@@ -16,12 +16,12 @@
         <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <asp:TextBox runat="server" TextMode="Password" CssClass="form-control" ID="passwordLogin"></asp:TextBox>
+                <asp:TextBox runat="server" CssClass="form-control" ID="passwordLogin" ></asp:TextBox>
             </div>
         </div>
         <div class="d-flex flex-column justify-content-sm-between">
             <asp:CheckBox runat="server" ID="rememberMeCheckBox" Text="Remember me"/>
-            <asp:Button runat="server" ID="loginButton" CssClass="btn btn-primary" Text="Login" OnClick="loginButton_Click"/>
+            <asp:Button runat="server" ID="loginButton" CssClass="btn btn-primary" Text="Login" OnClick="loginButtons_Click"/>
         </div>
     </form>
 </asp:Content>

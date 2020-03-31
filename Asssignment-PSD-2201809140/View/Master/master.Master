@@ -14,12 +14,25 @@
      <link rel="stylesheet" href="../../Content/bootstrap.min.css">
 </head>
 <body>
-    <form id="form1" runat="server">
+<form id="form1" runat="server">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    Hello, <asp:Label runat="server" ID="username"></asp:Label> 
+   
+        
+    <div class="navbar-nav">
+        <asp:Button runat="server" ID="home" OnClick="home_Click" Text="Home" />
+     <asp:Button runat="server" Text="View Product" ID="viewProductButton" OnClick="viewProductButton_Click"/> 
+      <asp:Button runat="server" ID="viewProfileButton" OnClick="viewProfileButton_Click" Text="View Profile"/> 
+      <asp:Button runat="server" ID="logoutButton" OnClick="logoutButton_Click" Text="Log out"/> 
+        <asp:Button runat="server" ID="loginButtonpage" CssClass="nav-item btn btn-default" OnClick="loginButtonlagi_Click" Text="Log in page"/>
+        <asp:Button runat="server" ID="registerButton" CssClass="btn-default" OnClick="registerButton_Click" Text="Register"/>
+    </div>
+</nav>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-    </form>
+</form>
         <script src="../../Scripts/bootstrap.min.js"></script>
         <script src="../../Scripts/jquery-3.4.1.min.js"></script>
         <script src="../../Scripts/modernizr-2.8.3.js"></script>

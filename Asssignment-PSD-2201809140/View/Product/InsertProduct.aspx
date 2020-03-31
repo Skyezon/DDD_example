@@ -25,6 +25,7 @@
                 <asp:TextBox runat="server" CssClass="form-control" ID="productPriceInput"></asp:TextBox>
             </div>
         </div>
+    
 
         <div class="d-flex flex-column justify-content-sm-between">
             <asp:Button runat="server" ID="productInsertButton" CssClass="btn btn-primary" Text="Insert Product" OnClick="productInsertButton_Click" />

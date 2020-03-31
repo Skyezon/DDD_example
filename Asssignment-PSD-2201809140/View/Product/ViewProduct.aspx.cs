@@ -16,7 +16,8 @@ namespace Asssignment_PSD_2201809140.View
         protected void Page_Load(object sender, EventArgs e)
         {
             sessionUser = (Users)Session["SessionAuthUser"];
-            productList.DataSource = ProductRepository.GetProductList();
+            List <Object> newList = ProductRepository.GetProductListWithTypeName();
+            productList.DataSource = newList;
             productList.DataBind();
 
             hideAll(sessionUser == null ? "guest" : sessionUser.Roles.Name);
@@ -30,7 +31,7 @@ namespace Asssignment_PSD_2201809140.View
             {
                 foreach (GridViewRow row in productList.Rows)
                 {
-                    Button btnUpdate = row.FindControl("updateProductButton") as Button;
+                        Button btnUpdate = row.FindControl("updateProductButton") as Button;
                         Button btnDelete = row.FindControl("deleteProductButton") as Button;
                         btnUpdate.Visible = false;
                         btnDelete.Visible = false;
@@ -42,7 +43,7 @@ namespace Asssignment_PSD_2201809140.View
 
         protected void insertProductButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Product/InsertProduct.aspx");
+            Response.Redirect("InsertProduct.aspx");
 
         }
 

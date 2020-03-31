@@ -11,7 +11,7 @@ namespace Asssignment_PSD_2201809140.Factory
         public Products CreateProducts(String name, int price, int stock)
         {
             Products newProducts = new Products();
-            newProducts.Name = name;
+            newProducts.Name =  name;
             newProducts.Price = price;
             newProducts.Stock = stock;
             return newProducts;

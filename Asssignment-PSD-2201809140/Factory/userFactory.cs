@@ -17,7 +17,7 @@ namespace Asssignment_PSD_2201809140.Factory
             userbaru.RoleId = 2;
             userbaru.Password = password;
             userbaru.Gender = Gender;
-            userbaru.Status = "allow";
+            userbaru.Status = "active";
 
             return userbaru;
 

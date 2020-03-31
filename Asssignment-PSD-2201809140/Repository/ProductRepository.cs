@@ -16,17 +16,29 @@ namespace Asssignment_PSD_2201809140.Repository
            return (tokbedDb.Products).ToList();
         }
 
+        public static List<Object> GetProductListWithTypeName()
+        {
+
+           List<Object> baru = tokbedDb.Products.Select(satu => new {Productid = satu.Id, ProductName = satu.Name, ProductStock = satu.Stock, ProductType = satu.ProductTypes.Name, ProductQuantity = satu.Price}).ToList<Object>();
+           return baru;
+        }
+
         public static void InsertProduct(String Name, int Stock, int Price)
         {
+            List<ProductTypes> productTypeList = ProductTypeRepository.GetProductList();
+            Random rand = new Random();
             productFactory baru = new productFactory();
-            tokbedDb.Products.Add(baru.CreateProducts(Name,Price,Stock));
+            Products target = baru.CreateProducts(Name, Price, Stock);
+            int index = rand.Next(productTypeList.Count);
+            target.ProductTypeID = productTypeList[index].Id;
+            tokbedDb.Products.Add(target);
             tokbedDb.SaveChanges();
 
         }
 
         public static void UpdateProduct(String Name, int Stock, int Price, Products lama)
         {
-           Products dapat = tokbedDb.Products.Find(lama.Id);
+           Products dapat = FindProduct(lama.Id);
            dapat.Name = Name;
            dapat.Stock = Stock;
            dapat.Price = Price;

@@ -16,7 +16,7 @@ namespace Asssignment_PSD_2201809140.Repository
             return (tokbedDb.ProductTypes).ToList();
         }
 
-        public static void InsertProduct(String name, String description)
+        public static void InsertProductType(String name, String description)
         {
             productTypeFactory baru = new productTypeFactory();
             tokbedDb.ProductTypes.Add(baru.CreateProductTypes(description,name));
@@ -24,15 +24,38 @@ namespace Asssignment_PSD_2201809140.Repository
 
         }
 
-        public static void UpdateProduct(String name, String description, ProductTypes lama)
+        public static void UpdateProductType(String name, String description, ProductTypes lama)
         {
-            ProductTypes dapat = tokbedDb.ProductTypes.Find(lama.Id);
+            ProductTypes dapat = FindProductType(lama.Id);
             dapat.Name = name;
             dapat.Description = description;
             tokbedDb.SaveChanges();
 
         }
 
-        
+        public static ProductTypes FindProductType(int id)
+        {
+            ProductTypes dapat = tokbedDb.ProductTypes.Find(id);
+            return dapat;
+        }
+
+        public static void DeleteProductType(int id)
+        {
+            ProductTypes target = FindProductType(id);
+            tokbedDb.ProductTypes.Remove(target);
+            tokbedDb.SaveChanges();
+        }
+
+        public static bool isUnique(String name)
+        {
+            if (tokbedDb.ProductTypes.Where(satu => satu.Name.Equals(name)).FirstOrDefault() == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

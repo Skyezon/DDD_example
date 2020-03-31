@@ -17,8 +17,12 @@ namespace Asssignment_PSD_2201809140.View
 
             if (Request.Cookies["authUserPasswordCookie"] != null)
             {
-                emailLogin.Text = Request.Cookies["authUserEmailCookie"].Value;
-                passwordLogin.Text = Request.Cookies["authUserPasswordCookie"].Value;
+               if (!IsPostBack)
+               {
+                    emailLogin.Text = Request.Cookies["authUserEmailCookie"].Value;
+                    passwordLogin.Attributes.Add("value",Request.Cookies["authUserPasswordCookie"].Value); 
+                }
+               
             }
 
             if (Session["SessionAuthUser"] != null)
@@ -31,25 +35,27 @@ namespace Asssignment_PSD_2201809140.View
             }
             errorMessage.Visible = false;
             bannedMessage.Visible = false;
+            passwordLogin.TextMode = TextBoxMode.Password;
         }
 
-        protected void loginButton_Click(object sender, EventArgs e)
+        protected void loginButtons_Click(object sender, EventArgs e)
         {
             String emailInput = emailLogin.Text;
             String passwordInput = passwordLogin.Text;
 
             Users user = AccountRepository.findUser(emailInput, passwordInput);
 
-            if (AccountRepository.ifCredNull(emailInput,passwordInput))
+            if (user == null)
             {
                 errorMessage.Visible = true;
-            }else if (!user.Status.Equals("allowed"))
+            }else if (!user.Status.Equals("active"))
             {
                 bannedMessage.Visible = true;
-            }
-            else
+            }else
             {
-                Session["SessionAuthUser"] = user;
+                System.Diagnostics.Debug.WriteLine($"emailnya : {emailInput} passwordnya : {passwordInput}");
+       
+            
                 if (rememberMeCheckBox.Checked)
                 {
                     Response.Cookies["authUserEmailCookie"].Value = emailInput;
@@ -62,7 +68,11 @@ namespace Asssignment_PSD_2201809140.View
                 {
 
                 }
-                
+                Session["SessionAuthUsers"] = user;
+                Session["SessionAuthUser"] = user;
+
+                System.Diagnostics.Debug.WriteLine("berhasil login jadi session harusnya ke buat");
+
                 Response.Redirect("Home.aspx");
 
             }

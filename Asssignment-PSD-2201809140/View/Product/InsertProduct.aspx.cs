@@ -88,7 +88,8 @@ namespace Asssignment_PSD_2201809140.View
             int productPrice = Convert.ToInt32(productPriceInput.Text);
             if (validateAll(productName, productStock, productPrice))
             {
-                ProductRepository.InsertProduct(productName,productStock,productPrice);
+                ProductRepository.InsertProduct(productName,productStock,productPrice); 
+                Response.Redirect("ViewProduct.aspx");
             }
             else
             {
