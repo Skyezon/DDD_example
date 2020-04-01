@@ -33,7 +33,7 @@ namespace Asssignment_PSD_2201809140.View
         {
             if (String.IsNullOrEmpty(emailRegis.Text.ToString()) || AccountRepository.ifEmailExist(emailRegis.Text))
             {
-                errorList.Add("Must be filled and unique");
+                errorList.Add("Email Must be filled and unique");
                 return false;
             }
             else
@@ -46,7 +46,7 @@ namespace Asssignment_PSD_2201809140.View
         {
             if (String.IsNullOrEmpty(nameRegis.Text.ToString()))
             {
-                errorList.Add("Name Must be filled");
+                errorList.Add("name Must be filled");
                 return false;
             }
             else
@@ -59,7 +59,7 @@ namespace Asssignment_PSD_2201809140.View
         {
             if (String.IsNullOrEmpty(passwordRegis.Text.ToString()))
             {
-                errorList.Add("Name Must be filled");
+                errorList.Add("Password Must be filled");
 
                 return false;
             }
@@ -77,7 +77,7 @@ namespace Asssignment_PSD_2201809140.View
             }
             else
             {
-                errorList.Add("Pasword Must be same with password");
+                errorList.Add("confirm Pasword Must be same with password");
                 return false;
             }
         }
