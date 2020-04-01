@@ -12,9 +12,20 @@ namespace Asssignment_PSD_2201809140.View.ProductType
     public partial class ViewProductType : System.Web.UI.Page
     {
 
-        private Users sessionUser = new Users();
         protected void Page_Load(object sender, EventArgs e)
         {
+        Users sessionUser = (Users)Session["SessionAuthUser"];
+
+
+            if (sessionUser == null)
+            {
+                Response.Redirect("../Home.aspx");
+            }
+             if (!sessionUser.Roles.Name.Equals("admin"))
+            {
+                Response.Redirect("../Home.aspx");
+            }
+
             sessionUser = (Users)Session["SessionAuthUser"];
             viewProductGrid.DataSource = ProductTypeRepository.GetProductList();
             viewProductGrid.DataBind();
@@ -52,7 +63,7 @@ namespace Asssignment_PSD_2201809140.View.ProductType
             target.Id = productId;
             //ubahg repo
             ProductTypeRepository.DeleteProductType(target.Id);
-            Response.Redirect("ViewProduct.aspx");
+            Response.Redirect("ViewProductType.aspx");
         }
 
         protected void updateProductTypeButton_Click(object sender, EventArgs e)

@@ -4,12 +4,12 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:GridView runat="server" ID="productList">
         <Columns>
-            <asp:TemplateField>
+            <asp:TemplateField HeaderText="Update Button">
                 <ItemTemplate>
                     <asp:Button runat="server" ID="updateProductButton" OnClick="updateProductButton_Click" Text="Update Product"/>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField>
+            <asp:TemplateField HeaderText="Delete Button">
                 <ItemTemplate>
                     <asp:Button runat="server" ID="deleteProductButton" OnClick="deleteProductButton_Click" Text="Delete Product"/>
                 </ItemTemplate>

@@ -34,7 +34,7 @@ namespace Asssignment_PSD_2201809140.View.ProductType
                     productTypeDescription.Text = old.Description;
                 }
               
-                    ;
+                    
             }
 
         }
@@ -76,14 +76,15 @@ namespace Asssignment_PSD_2201809140.View.ProductType
             }
         }
 
-        protected void productInsertButton_Click(object sender, EventArgs e)
+        protected void productUpdateButton_Click(object sender, EventArgs e)
         {
             ErrorList.Clear();
             String productName = productTypeName.Text;
             String productDesc = productTypeDescription.Text;
+            int productTypeId = Convert.ToInt32(Request.QueryString["id"]);
             if (validateAll(productName, productDesc))
             {
-                ProductTypeRepository.InsertProductType(productName, productDesc);
+                ProductTypeRepository.UpdateProductType(productName, productDesc,ProductTypeRepository.FindProductType(productTypeId));
                 Response.Redirect("ViewProductType.aspx");
             }
             else

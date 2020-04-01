@@ -72,7 +72,7 @@ namespace Asssignment_PSD_2201809140.View
 
         protected void updateProductButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Product/UpdateProduct.aspx");
+            Response.Redirect("Product/ViewProduct.aspx");
         }
 
         protected void viewProductTypeButton_Click(object sender, EventArgs e)
@@ -87,7 +87,7 @@ namespace Asssignment_PSD_2201809140.View
 
         protected void updateProductTypeButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ProductType/UpdateProductType.aspx");
+            Response.Redirect("ProductType/ViewProductType.aspx");
         }
 
       

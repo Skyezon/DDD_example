@@ -2,8 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
     Update Product Type
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:GridView runat="server" CssClass="alert-danger" ID="errorGrid"></asp:GridView>
     <div class="form-group row">    
@@ -21,6 +20,6 @@
     </div>
 
     <div class="d-flex flex-column justify-content-sm-between">
-        <asp:Button runat="server" ID="productUpdateButton" CssClass="btn btn-primary" Text="Update Product Type" />
+        <asp:Button runat="server" ID="productUpdateButton" CssClass="btn btn-primary" Text="Update Product Type" OnClick="productUpdateButton_Click" />
     </div>
 </asp:Content>
