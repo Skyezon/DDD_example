@@ -15,7 +15,10 @@ namespace Asssignment_PSD_2201809140.View.ProductType
         protected void Page_Load(object sender, EventArgs e)
         {
 
-              Users sessionUser = (Users)Session["SessionAuthUser"];
+            Page.Form.DefaultButton = productUpdateButton.UniqueID;
+            Page.Form.DefaultFocus = productTypeName.ClientID;
+
+            Users sessionUser = (Users)Session["SessionAuthUser"];
             if (sessionUser == null ? true : !sessionUser.Roles.Name.Equals("admin"))
             {
                 Response.Redirect("../Home.aspx");

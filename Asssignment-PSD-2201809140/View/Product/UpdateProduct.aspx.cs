@@ -15,6 +15,9 @@ namespace Asssignment_PSD_2201809140.View.Product
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.Form.DefaultButton = productUpdateButton.UniqueID;
+            Page.Form.DefaultFocus = productNameInput.ClientID;
+
             Users sessionUser = (Users)Session["SessionAuthUser"];
             if (sessionUser == null ? true : !sessionUser.Roles.Name.Equals("admin"))
             {
@@ -27,9 +30,12 @@ namespace Asssignment_PSD_2201809140.View.Product
                 Products old = ProductRepository.FindProduct(targetProductId);
                 if (!IsPostBack)
                 {
+                    fillDropdown();
+
                     productNameInput.Text = old.Name;
                     productStockInput.Text = old.Stock.ToString();
                     productPriceInput.Text = old.Price.ToString();
+                    dropDownListTypeName.SelectedValue = old.ProductTypes.Name;
                 }
               
                     ;
@@ -37,6 +43,21 @@ namespace Asssignment_PSD_2201809140.View.Product
 
         }
 
+
+        protected void fillDropdown()
+        {
+            List<ProductTypes> productTypeList = ProductTypeRepository.GetProductList();
+            List<String> productTypename = new List<string>();
+
+            foreach (ProductTypes satu in productTypeList)
+            {
+                productTypename.Add(satu.Name);
+            }
+
+            dropDownListTypeName.DataSource = productTypename;
+            dropDownListTypeName.DataBind();
+
+        }
         protected bool validateName(String name)
         {
             if (String.IsNullOrEmpty(name))
@@ -98,11 +119,12 @@ namespace Asssignment_PSD_2201809140.View.Product
             String productName = productNameInput.Text;
             int productStock = Convert.ToInt32(productStockInput.Text);
             int productPrice = Convert.ToInt32(productPriceInput.Text);
+            String productTypeName = dropDownListTypeName.SelectedValue;
             System.Diagnostics.Debug.WriteLine($"{productName} stocknya : {productStock} price : {productPrice}");
             if (validateAll(productName,productStock,productPrice))
             {
 
-                ProductRepository.UpdateProduct(productName,productStock,productPrice,old);
+                ProductRepository.UpdateProduct(productName,productStock,productPrice,old,productTypeName);
                 Response.Redirect("ViewProduct.aspx");
             }
             else

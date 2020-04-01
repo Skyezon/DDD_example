@@ -15,6 +15,10 @@ namespace Asssignment_PSD_2201809140.View.Account
         List<String> errorList = new List<string>();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            Page.Form.DefaultButton = profileUpdateButton.UniqueID;
+            Page.Form.DefaultFocus = emailInput.ClientID;
+
             Users sessionUsers = (Users)Session["SessionAuthUser"];
 
             if (!IsPostBack)

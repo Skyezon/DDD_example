@@ -10,6 +10,7 @@ namespace Asssignment_PSD_2201809140.View.Master
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Users sessionUser = (Users)Session["SessionAuthUser"];

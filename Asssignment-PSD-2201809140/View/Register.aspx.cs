@@ -16,6 +16,9 @@ namespace Asssignment_PSD_2201809140.View
         List<String> errorList = new List<string>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.Form.DefaultButton = regisButton.UniqueID;
+            Page.Form.DefaultFocus = emailRegis.ClientID;
+
             if (Session["SessionAuthUser"] != null)
             {
                 Response.Redirect("Home.aspx");

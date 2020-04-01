@@ -51,6 +51,15 @@ namespace Asssignment_PSD_2201809140.View.Product
         protected global::System.Web.UI.WebControls.TextBox productPriceInput;
 
         /// <summary>
+        /// dropDownListTypeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropDownListTypeName;
+
+        /// <summary>
         /// productUpdateButton control.
         /// </summary>
         /// <remarks>

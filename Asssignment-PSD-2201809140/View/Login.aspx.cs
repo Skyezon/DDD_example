@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Asssignment_PSD_2201809140.Model;
 using Asssignment_PSD_2201809140.Repository;
@@ -13,7 +14,8 @@ namespace Asssignment_PSD_2201809140.View
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Page.Form.DefaultButton = loginButton.UniqueID;
+            Page.Form.DefaultFocus = emailLogin.ClientID;
 
             if (Request.Cookies["authUserPasswordCookie"] != null)
             {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Asssignment_PSD_2201809140.Model;
 using Asssignment_PSD_2201809140.Repository;
@@ -14,6 +15,8 @@ namespace Asssignment_PSD_2201809140.View
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
             Users sessionUser = (Users)Session["SessionAuthUser"];
             
             if (sessionUser == null || sessionUser.Roles.Name.Equals("member"))

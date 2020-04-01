@@ -26,6 +26,14 @@
                 <asp:TextBox runat="server" CssClass="form-control" ID="productPriceInput"></asp:TextBox>
             </div>
         </div>
+    
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Product Type name</label>
+            <div class="col-sm-10">
+                <asp:DropDownList ID="dropDownListTypeName" runat="server">
+                </asp:DropDownList>
+            </div>
+        </div>
 
         <div class="d-flex flex-column justify-content-sm-between">
             <asp:Button runat="server" ID="productUpdateButton" CssClass="btn btn-primary" Text="Update Product" OnClick="productUpdateButton_Click" />

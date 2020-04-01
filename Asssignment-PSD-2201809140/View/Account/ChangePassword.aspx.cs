@@ -15,6 +15,9 @@ namespace Asssignment_PSD_2201809140.View.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.Form.DefaultButton = changePasswordButton.UniqueID;
+            Page.Form.DefaultFocus = oldPasswordInput.ClientID;
+
             Users sessionUsers = (Users) Session["SessionAuthUser"];
 
             if (sessionUsers == null)

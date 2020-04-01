@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,6 +15,13 @@ namespace Asssignment_PSD_2201809140.View
         List<String> errorList = new List<string>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.Form.DefaultButton = productInsertButton.UniqueID;
+            Page.Form.DefaultFocus = productNameInput.ClientID;
+            if (!IsPostBack)
+            {
+              fillDropdown();
+            }
+
             Users sessionUser = (Users) Session["SessionAuthUser"];
 
             if (!sessionUser.Roles.Name.Equals("admin"))
@@ -24,6 +32,21 @@ namespace Asssignment_PSD_2201809140.View
             {
                 
             }
+        }
+
+        protected void fillDropdown()
+        {
+            List<ProductTypes> productTypeList = ProductTypeRepository.GetProductList();
+            List<String> productTypename = new List<string>();
+
+            foreach (ProductTypes satu in productTypeList)
+            {
+                productTypename.Add(satu.Name);
+            }
+
+            dropDownListType.DataSource = productTypename;
+            dropDownListType.DataBind();
+
         }
 
         protected bool validateName(String name)
@@ -88,7 +111,10 @@ namespace Asssignment_PSD_2201809140.View
             int productPrice = Convert.ToInt32(productPriceInput.Text);
             if (validateAll(productName, productStock, productPrice))
             {
-                ProductRepository.InsertProduct(productName,productStock,productPrice); 
+
+                System.Diagnostics.Debug.WriteLine(dropDownListType.SelectedValue);
+                
+                ProductRepository.InsertProduct(productName,productStock,productPrice, ProductTypeRepository.findId(dropDownListType.SelectedItem.Value)); 
                 Response.Redirect("ViewProduct.aspx");
             }
             else

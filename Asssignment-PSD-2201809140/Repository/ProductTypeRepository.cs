@@ -39,6 +39,13 @@ namespace Asssignment_PSD_2201809140.Repository
             return dapat;
         }
 
+        public static int findId(String productTypeName)
+        {
+            ProductTypes dapat = tokbedDb.ProductTypes.Where(satu => satu.Name.Equals(productTypeName))
+                .FirstOrDefault();
+            return dapat.Id;
+        }
+
         public static void DeleteProductType(int id)
         {
             ProductTypes target = FindProductType(id);
