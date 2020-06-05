@@ -23,9 +23,11 @@ namespace Asssignment_PSD_2201809140.Model
         public int Id { get; set; }
         public int UserID { get; set; }
         public System.DateTime Date { get; set; }
+        public Nullable<int> PaymentTypeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetailTransactions> DetailTransactions { get; set; }
         public virtual Users Users { get; set; }
+        public virtual PaymentTypes PaymentTypes { get; set; }
     }
 }

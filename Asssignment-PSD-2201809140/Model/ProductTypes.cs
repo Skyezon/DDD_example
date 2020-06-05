@@ -19,8 +19,6 @@ namespace Asssignment_PSD_2201809140.Model
         {
             this.Products = new HashSet<Products>();
         }
-
-        
     
         public int Id { get; set; }
         public string Name { get; set; }

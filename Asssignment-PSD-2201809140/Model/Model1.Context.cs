@@ -31,5 +31,7 @@ namespace Asssignment_PSD_2201809140.Model
         public virtual DbSet<ProductTypes> ProductTypes { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Carts> Carts { get; set; }
+        public virtual DbSet<PaymentTypes> PaymentTypes { get; set; }
     }
 }

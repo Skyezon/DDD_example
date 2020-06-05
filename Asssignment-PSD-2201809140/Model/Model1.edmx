@@ -4,7 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseTokbedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatabaseTokbedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Carts">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
         <EntityType Name="DetailTransactions">
           <Key>
             <PropertyRef Name="TransactionId" />
@@ -21,6 +30,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="PaymentTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -59,6 +76,34 @@
           <Property Name="Gender" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK__Carts__ProductID__5FB337D6">
+          <End Role="Products" Type="Self.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Carts" Type="Self.Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carts__UserID__5EBF139D">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Carts" Type="Self.Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__DetailTra__Produ__34C8D9D1">
           <End Role="Products" Type="Self.Products" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -87,6 +132,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__HeaderTra__Payme__3A4CA8FD">
+          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HeaderTransaction" Type="Self.HeaderTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HeaderTransaction">
+              <PropertyRef Name="PaymentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__HeaderTra__UserI__30F848ED">
           <End Role="Users" Type="Self.Users" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -101,7 +160,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Produc__2D27B809">
+        <Association Name="FK__Products__Produc__607251E5">
           <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -115,7 +174,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__RoleId__300424B4">
+        <Association Name="FK__Users__RoleId__2739D489">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -130,12 +189,22 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DatabaseTokbedModelStoreContainer">
+          <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetailTransactions" EntityType="Self.DetailTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HeaderTransaction" EntityType="Self.HeaderTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Carts__ProductID__5FB337D6" Association="Self.FK__Carts__ProductID__5FB337D6">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carts__UserID__5EBF139D" Association="Self.FK__Carts__UserID__5EBF139D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
           <AssociationSet Name="FK__DetailTra__Produ__34C8D9D1" Association="Self.FK__DetailTra__Produ__34C8D9D1">
             <End Role="Products" EntitySet="Products" />
             <End Role="DetailTransactions" EntitySet="DetailTransactions" />
@@ -144,21 +213,24 @@
             <End Role="HeaderTransaction" EntitySet="HeaderTransaction" />
             <End Role="DetailTransactions" EntitySet="DetailTransactions" />
           </AssociationSet>
+          <AssociationSet Name="FK__HeaderTra__Payme__3A4CA8FD" Association="Self.FK__HeaderTra__Payme__3A4CA8FD">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="HeaderTransaction" EntitySet="HeaderTransaction" />
+          </AssociationSet>
           <AssociationSet Name="FK__HeaderTra__UserI__30F848ED" Association="Self.FK__HeaderTra__UserI__30F848ED">
             <End Role="Users" EntitySet="Users" />
             <End Role="HeaderTransaction" EntitySet="HeaderTransaction" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Produc__2D27B809" Association="Self.FK__Products__Produc__2D27B809">
+          <AssociationSet Name="FK__Products__Produc__607251E5" Association="Self.FK__Products__Produc__607251E5">
             <End Role="ProductTypes" EntitySet="ProductTypes" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__RoleId__300424B4" Association="Self.FK__Users__RoleId__300424B4">
+          <AssociationSet Name="FK__Users__RoleId__2739D489" Association="Self.FK__Users__RoleId__2739D489">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseTokbedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -182,6 +254,8 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="DetailTransactions" Relationship="Self.FK__DetailTra__Trans__33D4B598" FromRole="HeaderTransaction" ToRole="DetailTransactions" />
           <NavigationProperty Name="Users" Relationship="Self.FK__HeaderTra__UserI__30F848ED" FromRole="HeaderTransaction" ToRole="Users" />
+          <Property Name="PaymentTypeID" Type="Int32" />
+          <NavigationProperty Name="PaymentTypes" Relationship="DatabaseTokbedModel.FK__HeaderTra__Payme__60A75C0F" FromRole="HeaderTransaction" ToRole="PaymentTypes" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -194,6 +268,7 @@
           <Property Name="Stock" Type="Int32" />
           <NavigationProperty Name="DetailTransactions" Relationship="Self.FK__DetailTra__Produ__34C8D9D1" FromRole="Products" ToRole="DetailTransactions" />
           <NavigationProperty Name="ProductTypes" Relationship="Self.FK__Products__Produc__2D27B809" FromRole="Products" ToRole="ProductTypes" />
+          <NavigationProperty Name="Carts" Relationship="DatabaseTokbedModel.FK__Carts__ProductID__5FB337D6" FromRole="Products" ToRole="Carts" />
         </EntityType>
         <EntityType Name="ProductTypes">
           <Key>
@@ -225,6 +300,7 @@
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="HeaderTransaction" Relationship="Self.FK__HeaderTra__UserI__30F848ED" FromRole="Users" ToRole="HeaderTransaction" />
           <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleId__300424B4" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Carts" Relationship="DatabaseTokbedModel.FK__Carts__UserID__5EBF139D" FromRole="Users" ToRole="Carts" />
         </EntityType>
         <Association Name="FK__DetailTra__Produ__34C8D9D1">
           <End Role="Products" Type="Self.Products" Multiplicity="1">
@@ -323,7 +399,82 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Carts" EntityType="DatabaseTokbedModel.Carts" />
+          <EntitySet Name="PaymentTypes" EntityType="DatabaseTokbedModel.PaymentTypes" />
+          <AssociationSet Name="FK__Carts__ProductID__5FB337D6" Association="DatabaseTokbedModel.FK__Carts__ProductID__5FB337D6">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carts__UserID__5EBF139D" Association="DatabaseTokbedModel.FK__Carts__UserID__5EBF139D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HeaderTra__Payme__60A75C0F" Association="DatabaseTokbedModel.FK__HeaderTra__Payme__60A75C0F">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="HeaderTransaction" EntitySet="HeaderTransaction" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Carts">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="DatabaseTokbedModel.FK__Carts__ProductID__5FB337D6" FromRole="Carts" ToRole="Products" />
+          <NavigationProperty Name="Users" Relationship="DatabaseTokbedModel.FK__Carts__UserID__5EBF139D" FromRole="Carts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HeaderTransaction" Relationship="DatabaseTokbedModel.FK__HeaderTra__Payme__60A75C0F" FromRole="PaymentTypes" ToRole="HeaderTransaction" />
+        </EntityType>
+        <Association Name="FK__Carts__ProductID__5FB337D6">
+          <End Type="DatabaseTokbedModel.Products" Role="Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DatabaseTokbedModel.Carts" Role="Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carts__UserID__5EBF139D">
+          <End Type="DatabaseTokbedModel.Users" Role="Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DatabaseTokbedModel.Carts" Role="Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HeaderTra__Payme__60A75C0F">
+          <End Type="DatabaseTokbedModel.PaymentTypes" Role="PaymentTypes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DatabaseTokbedModel.HeaderTransaction" Role="HeaderTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HeaderTransaction">
+              <PropertyRef Name="PaymentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -342,6 +493,7 @@
           <EntitySetMapping Name="HeaderTransaction">
             <EntityTypeMapping TypeName="DatabaseTokbedModel.HeaderTransaction">
               <MappingFragment StoreEntitySet="HeaderTransaction">
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -389,6 +541,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="DatabaseTokbedModel.Carts">
+              <MappingFragment StoreEntitySet="Carts">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="DatabaseTokbedModel.PaymentTypes">
+              <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -407,6 +576,7 @@
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="SynchronizePropertyFacets" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

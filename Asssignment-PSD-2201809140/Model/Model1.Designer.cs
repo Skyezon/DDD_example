@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\code-project\Web-project\Visual-studio\Asssignment-PSD-2201809140\Asssignment-PSD-2201809140\Model\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\code-project\binus-code\DDD_example\Asssignment-PSD-2201809140\Model\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

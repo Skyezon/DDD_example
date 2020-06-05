@@ -18,6 +18,7 @@ namespace Asssignment_PSD_2201809140.Model
         public Users()
         {
             this.HeaderTransaction = new HashSet<HeaderTransaction>();
+            this.Carts = new HashSet<Carts>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,7 @@ namespace Asssignment_PSD_2201809140.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HeaderTransaction> HeaderTransaction { get; set; }
         public virtual Roles Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carts> Carts { get; set; }
     }
 }

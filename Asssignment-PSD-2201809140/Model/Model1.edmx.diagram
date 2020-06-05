@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0e867451292d46d3bc35a5ea9d4409ea" Name="Diagram1">
+      <Diagram DiagramId="0e867451292d46d3bc35a5ea9d4409ea" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="DatabaseTokbedModel.DetailTransactions" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseTokbedModel.HeaderTransaction" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseTokbedModel.Products" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
@@ -16,6 +16,11 @@
         <AssociationConnector Association="DatabaseTokbedModel.FK__HeaderTra__UserI__30F848ED" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseTokbedModel.FK__Products__Produc__2D27B809" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseTokbedModel.FK__Users__RoleId__300424B4" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DatabaseTokbedModel.Carts" Width="1.5" PointX="7.5" PointY="4.375" />
+        <EntityTypeShape EntityType="DatabaseTokbedModel.PaymentTypes" Width="1.5" PointX="3" PointY="8.75" />
+        <AssociationConnector Association="DatabaseTokbedModel.FK__Carts__ProductID__5FB337D6" />
+        <AssociationConnector Association="DatabaseTokbedModel.FK__Carts__UserID__5EBF139D" />
+        <AssociationConnector Association="DatabaseTokbedModel.FK__HeaderTra__Payme__60A75C0F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

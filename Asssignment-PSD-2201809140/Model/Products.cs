@@ -18,10 +18,9 @@ namespace Asssignment_PSD_2201809140.Model
         public Products()
         {
             this.DetailTransactions = new HashSet<DetailTransactions>();
+            this.Carts = new HashSet<Carts>();
         }
-
-        
-
+    
         public int Id { get; set; }
         public int ProductTypeID { get; set; }
         public string Name { get; set; }
@@ -31,5 +30,7 @@ namespace Asssignment_PSD_2201809140.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetailTransactions> DetailTransactions { get; set; }
         public virtual ProductTypes ProductTypes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carts> Carts { get; set; }
     }
 }

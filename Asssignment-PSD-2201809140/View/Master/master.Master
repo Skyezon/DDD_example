@@ -7,7 +7,6 @@
     <title>
         <asp:ContentPlaceHolder ID="title" runat="server"></asp:ContentPlaceHolder>
     </title>
-    <link style
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
      <link rel="stylesheet" href="../../Content/bootstrap-theme.min.css">
