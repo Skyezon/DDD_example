@@ -169,6 +169,8 @@
     <Content Include="View\Account\ChangePassword.aspx" />
     <Content Include="View\Account\UpdateProfile.aspx" />
     <Content Include="View\Account\ViewUser.aspx" />
+    <Content Include="View\Cart\InsertCart.aspx" />
+    <Content Include="View\Cart\UpdateCart.aspx" />
     <Content Include="View\Home.aspx" />
     <Content Include="View\ProductType\InsertProductType.aspx" />
     <Content Include="View\ProductType\UpdateProductType.aspx" />
@@ -185,12 +187,17 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controller\CartController.cs" />
+    <Compile Include="Controller\ProductController.cs" />
+    <Compile Include="Factory\CartFactory.cs" />
     <Compile Include="Factory\productFactory.cs" />
     <Compile Include="Factory\productTypeFactory.cs" />
     <Compile Include="Factory\userFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handler\CartHandler.cs" />
+    <Compile Include="Handler\ProductHandler.cs" />
     <Compile Include="Model\Carts.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -231,6 +238,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CartRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\ProductTypeRepository.cs" />
     <Compile Include="Repository\AccountRepository.cs" />
@@ -268,6 +276,20 @@
     </Compile>
     <Compile Include="View\Account\ViewUser.aspx.designer.cs">
       <DependentUpon>ViewUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Cart\InsertCart.aspx.cs">
+      <DependentUpon>InsertCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Cart\InsertCart.aspx.designer.cs">
+      <DependentUpon>InsertCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Cart\UpdateCart.aspx.cs">
+      <DependentUpon>UpdateCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Cart\UpdateCart.aspx.designer.cs">
+      <DependentUpon>UpdateCart.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\ProductType\InsertProductType.aspx.cs">
       <DependentUpon>InsertProductType.aspx</DependentUpon>
@@ -365,8 +387,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controller\" />
-    <Folder Include="Handler\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\Model1.edmx">

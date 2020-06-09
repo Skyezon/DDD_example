@@ -30,7 +30,7 @@
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Product Type name</label>
             <div class="col-sm-10">
-                <asp:DropDownList ID="dropDownListTypeName" runat="server">
+                <asp:DropDownList ID="dropDownListType" runat="server">
                 </asp:DropDownList>
             </div>
         </div>
