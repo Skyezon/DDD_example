@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Asssignment_PSD_2201809140.Controller;
-using Asssignment_PSD_2201809140.Handler;
 using Asssignment_PSD_2201809140.Model;
 
 namespace Asssignment_PSD_2201809140.View.Cart
@@ -13,7 +12,7 @@ namespace Asssignment_PSD_2201809140.View.Cart
     public partial class WebForm1 : System.Web.UI.Page
     {
         CartController cartController = new CartController();
-
+        ProductController productController = new ProductController();
         protected void Page_Load(object sender, EventArgs e)
         {
             int targetProductId = Convert.ToInt32(Request.QueryString["id"]);
@@ -30,9 +29,7 @@ namespace Asssignment_PSD_2201809140.View.Cart
                 Response.Redirect("../Home.aspx");
             }
             //"InsertCart.aspx?id=" + productId
-
-            ProductHandler productHandler = new ProductHandler();
-            Products getProduct = productHandler.FindProduct(targetProductId);
+            Products getProduct = productController.FindProduct(targetProductId);
 
             cartProductName.Text = getProduct.Name;
             cartProductPrice.Text = getProduct.Price.ToString();

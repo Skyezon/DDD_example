@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Asssignment_PSD_2201809140.Controller;
 using Asssignment_PSD_2201809140.Model;
-using Asssignment_PSD_2201809140.Repository;
 
 namespace Asssignment_PSD_2201809140.View
 {
@@ -13,10 +13,11 @@ namespace Asssignment_PSD_2201809140.View
     {
 
         private Users sessionUser = new Users();
+        ProductController productController = new ProductController();
         protected void Page_Load(object sender, EventArgs e)
         {
             sessionUser = (Users)Session["SessionAuthUser"];
-            List <Object> newList = ProductRepository.GetProductListWithTypeName();
+            List <Object> newList = productController.GetProductListWithTypeName();
             productList.DataSource = newList;
             productList.DataBind();
 
@@ -72,7 +73,7 @@ namespace Asssignment_PSD_2201809140.View
             int productId = Convert.ToInt16(productList.Rows[rowIndex].Cells[2].Text);
             Products target = new Products();
             target.Id = productId;
-            ProductRepository.DeleteProduct(target.Id);
+            productController.DeleteProduct(target.Id);
             Response.Redirect("ViewProduct.aspx");
         }
     }

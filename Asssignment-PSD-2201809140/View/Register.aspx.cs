@@ -4,16 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Asssignment_PSD_2201809140.Factory;
+using Asssignment_PSD_2201809140.Controller;
 using Asssignment_PSD_2201809140.Model;
-using Asssignment_PSD_2201809140.Repository;
 using String = System.String;
 
 namespace Asssignment_PSD_2201809140.View
 {
     public partial class WebForm3 : System.Web.UI.Page
     {
-        List<String> errorList = new List<string>();
+        AccountController accountController = new AccountController();
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.Form.DefaultButton = regisButton.UniqueID;
@@ -29,108 +28,23 @@ namespace Asssignment_PSD_2201809140.View
             }
         }
 
-        protected bool validateEmail()
-        {
-            if (String.IsNullOrEmpty(emailRegis.Text.ToString()) || AccountRepository.ifEmailExist(emailRegis.Text))
-            {
-                errorList.Add("Email Must be filled and unique");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        protected bool validateName()
-        {
-            if (String.IsNullOrEmpty(nameRegis.Text.ToString()))
-            {
-                errorList.Add("name Must be filled");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        protected bool validatePassword()
-        {
-            if (String.IsNullOrEmpty(passwordRegis.Text.ToString()))
-            {
-                errorList.Add("Password Must be filled");
-
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        protected bool validateConfirmPassword()
-        {
-            if (passwordRegis.Text.Equals(confirmPasswordRegis.Text.ToString()))
-            {
-                return true;
-            }
-            else
-            {
-                errorList.Add("confirm Pasword Must be same with password");
-                return false;
-            }
-        }
-
-        protected bool validateGender()
-        {
-            String genderValue = genderRegis.SelectedValue;
-            if (String.IsNullOrEmpty(genderValue))
-            {
-                errorList.Add("Gender Must be chosen");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        protected bool checkAllValidation()
-        {
-            bool isemailGud = validateEmail();
-            bool isnameGud = validateName();
-            bool ispasswordGud = validatePassword();
-            bool isconfirmGud = validateConfirmPassword();
-            bool isgenderGud = validateGender();
-            if (isemailGud && isnameGud && ispasswordGud && isconfirmGud && isgenderGud)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
+       
         protected void regisButton_Click(object sender, EventArgs e)
         {
-            errorList.Clear();
+            accountController.errorList.Clear();
             listOfError.DataSource = null;
             
-            if (checkAllValidation())
+            if (accountController.checkAllValidation(passwordRegis.Text,confirmPasswordRegis.Text,genderRegis.Text,nameRegis.Text,emailRegis.Text))
             {
-                userFactory userPabrik =  new userFactory();
-                Users userBaru = userPabrik.CreateUser(emailRegis.Text, nameRegis.Text, passwordRegis.Text,
+                
+                accountController.insertUser(emailRegis.Text, nameRegis.Text, passwordRegis.Text,
                     genderRegis.Text);
-                AccountRepository.insertUser(userBaru);
                 Response.Redirect("Login.aspx");
 
             }
             else
             {
-                listOfError.DataSource = errorList;
+                listOfError.DataSource = accountController.errorList;
                 listOfError.DataBind();
             }
         }

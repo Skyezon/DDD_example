@@ -4,14 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Asssignment_PSD_2201809140.Controller;
 using Asssignment_PSD_2201809140.Model;
-using Asssignment_PSD_2201809140.Repository;
 
 namespace Asssignment_PSD_2201809140.View.ProductType
 {
     public partial class UpdateProductType : System.Web.UI.Page
     {
-        private List<String> ErrorList = new List<string>();
+        ProductTypeController productTypeController = new ProductTypeController();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -27,7 +27,7 @@ namespace Asssignment_PSD_2201809140.View.ProductType
             {
                 //"UpdateProduct.aspx?id=" + productId
                 int targetProductId = Convert.ToInt32(Request.QueryString["id"]);
-                ProductTypes old = ProductTypeRepository.FindProductType(targetProductId);
+                ProductTypes old = productTypeController.FindProductType(targetProductId);
                 if (!IsPostBack)
                 {
                     productTypeName.Text = old.Name;
@@ -38,58 +38,21 @@ namespace Asssignment_PSD_2201809140.View.ProductType
             }
 
         }
-        protected bool validateName(String name)
-        {
-            if (ProductTypeRepository.isUnique(name))
-            {
-                return true;
-            }
-            else
-            {
-                ErrorList.Add("Product type Name must be unique");
-                return false;
-            }
-        }
-
-        protected bool validateDescription(String desc)
-        {
-            if (String.IsNullOrEmpty(desc))
-            {
-                ErrorList.Add("Description must be filled");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        protected bool validateAll(String name, String desc)
-        {
-            if (validateName(name) && validateDescription(desc))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
+        
         protected void productUpdateButton_Click(object sender, EventArgs e)
         {
-            ErrorList.Clear();
+            productTypeController.errorList.Clear();
             String productName = productTypeName.Text;
             String productDesc = productTypeDescription.Text;
             int productTypeId = Convert.ToInt32(Request.QueryString["id"]);
-            if (validateAll(productName, productDesc))
+            if (productTypeController.validateAll(productName, productDesc))
             {
-                ProductTypeRepository.UpdateProductType(productName, productDesc,ProductTypeRepository.FindProductType(productTypeId));
+                productTypeController.UpdateProductType(productName, productDesc,productTypeController.FindProductType(productTypeId));
                 Response.Redirect("ViewProductType.aspx");
             }
             else
             {
-                errorGrid.DataSource = ErrorList;
+                errorGrid.DataSource = productTypeController.errorList;
                 errorGrid.DataBind();
             }
         }

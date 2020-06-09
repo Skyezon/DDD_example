@@ -187,8 +187,10 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controller\AccountController.cs" />
     <Compile Include="Controller\CartController.cs" />
     <Compile Include="Controller\ProductController.cs" />
+    <Compile Include="Controller\ProductTypeController.cs" />
     <Compile Include="Factory\CartFactory.cs" />
     <Compile Include="Factory\productFactory.cs" />
     <Compile Include="Factory\productTypeFactory.cs" />
@@ -196,8 +198,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handler\AccountHandler.cs" />
     <Compile Include="Handler\CartHandler.cs" />
     <Compile Include="Handler\ProductHandler.cs" />
+    <Compile Include="Handler\ProductTypeHandler.cs" />
     <Compile Include="Model\Carts.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

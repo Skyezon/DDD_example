@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Asssignment_PSD_2201809140.Handler;
+using Asssignment_PSD_2201809140.Model;
 
 namespace Asssignment_PSD_2201809140.Controller
 {
     public class ProductController
     {
-       public List<String> errorList = new List<string>();
+        public List<String> errorList = new List<string>();
 
         public bool validateName(String name)
         {
@@ -61,5 +63,38 @@ namespace Asssignment_PSD_2201809140.Controller
                 return false;
             }
         }
+
+        public  Products FindProduct(int id)
+        {
+            return ProductHandler.FindProduct(id);
+        }
+
+        public  List<Products> GetProductList()
+        {
+            return ProductHandler.GetProductList();
+        }
+
+        public  List<Object> GetProductListWithTypeName()
+        {
+
+            return ProductHandler.GetProductListWithTypeName();
+        }
+
+        public  void InsertProduct(String Name, int Stock, int Price, int id)
+        {
+           ProductHandler.InsertProduct(Name,Stock,Price,id);
+
+        }
+
+        public  void UpdateProduct(String Name, int Stock, int Price, Products lama, String typeName)
+        {
+            ProductHandler.UpdateProduct(Name, Stock, Price, lama, typeName);
+        }
+
+        public  void DeleteProduct(int id)
+        {
+            ProductHandler.DeleteProduct(id);
+        }
+
     }
 }

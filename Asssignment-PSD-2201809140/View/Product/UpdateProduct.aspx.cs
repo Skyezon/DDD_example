@@ -6,13 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Asssignment_PSD_2201809140.Controller;
 using Asssignment_PSD_2201809140.Model;
-using Asssignment_PSD_2201809140.Repository;
 
 namespace Asssignment_PSD_2201809140.View.Product
 {
     public partial class UpdateProduct : System.Web.UI.Page
     {
         ProductController productController = new ProductController();
+        ProductTypeController productTypeController = new ProductTypeController();
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.Form.DefaultButton = productUpdateButton.UniqueID;
@@ -27,7 +27,7 @@ namespace Asssignment_PSD_2201809140.View.Product
             {
                 //"UpdateProduct.aspx?id=" + productId
                 int targetProductId = Convert.ToInt32(Request.QueryString["id"]);
-                Products old = ProductRepository.FindProduct(targetProductId);
+                Products old = productController.FindProduct(targetProductId);
                 if (!IsPostBack)
                 {
                     fillDropdown();
@@ -46,7 +46,7 @@ namespace Asssignment_PSD_2201809140.View.Product
 
         protected void fillDropdown()
         {
-            List<ProductTypes> productTypeList = ProductTypeRepository.GetProductList();
+            List<ProductTypes> productTypeList = productTypeController.GetProductList();
             List<String> productTypename = new List<string>();
 
             foreach (ProductTypes satu in productTypeList)
@@ -63,7 +63,7 @@ namespace Asssignment_PSD_2201809140.View.Product
         {
             productController.errorList.Clear();
             int targetProductId = Convert.ToInt32(Request.QueryString["id"]);
-            Products old = ProductRepository.FindProduct(targetProductId);
+            Products old = productController.FindProduct(targetProductId);
             String productName = productNameInput.Text;
             int productStock = Convert.ToInt32(productStockInput.Text);
             int productPrice = Convert.ToInt32(productPriceInput.Text);
@@ -71,7 +71,7 @@ namespace Asssignment_PSD_2201809140.View.Product
             if (productController.validateAll(productName,productStock,productPrice))
             {
 
-                ProductRepository.UpdateProduct(productName,productStock,productPrice,old,productTypeName);
+                productController.UpdateProduct(productName,productStock,productPrice,old,productTypeName);
                 Response.Redirect("ViewProduct.aspx");
             }
             else

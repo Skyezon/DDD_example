@@ -4,14 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Asssignment_PSD_2201809140.Controller;
 using Asssignment_PSD_2201809140.Model;
-using Asssignment_PSD_2201809140.Repository;
 
 namespace Asssignment_PSD_2201809140.View.ProductType
 {
     public partial class ViewProductType : System.Web.UI.Page
     {
-
+        ProductTypeController productTypeController = new ProductTypeController();
         protected void Page_Load(object sender, EventArgs e)
         {
         Users sessionUser = (Users)Session["SessionAuthUser"];
@@ -27,7 +27,7 @@ namespace Asssignment_PSD_2201809140.View.ProductType
             }
 
             sessionUser = (Users)Session["SessionAuthUser"];
-            viewProductGrid.DataSource = ProductTypeRepository.GetProductList();
+            viewProductGrid.DataSource = productTypeController.GetProductList();
             viewProductGrid.DataBind();
 
             hideAll(sessionUser == null ? "guest" : sessionUser.Roles.Name);
@@ -62,7 +62,7 @@ namespace Asssignment_PSD_2201809140.View.ProductType
             ProductTypes target = new ProductTypes();
             target.Id = productId;
             //ubahg repo
-            ProductTypeRepository.DeleteProductType(target.Id);
+            productTypeController.DeleteProductType(target.Id);
             Response.Redirect("ViewProductType.aspx");
         }
 

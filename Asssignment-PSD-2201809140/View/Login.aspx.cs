@@ -55,8 +55,7 @@ namespace Asssignment_PSD_2201809140.View
                 bannedMessage.Visible = true;
             }else
             {
-                System.Diagnostics.Debug.WriteLine($"emailnya : {emailInput} passwordnya : {passwordInput}");
-       
+
             
                 if (rememberMeCheckBox.Checked)
                 {

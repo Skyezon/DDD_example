@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Asssignment_PSD_2201809140.Controller;
-using Asssignment_PSD_2201809140.Handler;
 using Asssignment_PSD_2201809140.Model;
 
 namespace Asssignment_PSD_2201809140.View.Cart
@@ -14,7 +13,7 @@ namespace Asssignment_PSD_2201809140.View.Cart
     {
 
         CartController cartController = new CartController();
-        ProductHandler productHandler = new ProductHandler();
+        ProductController productHandler = new ProductController();
         protected void Page_Load(object sender, EventArgs e)
         {
             Users sessionUser = (Users)Session["SessionAuthUser"];

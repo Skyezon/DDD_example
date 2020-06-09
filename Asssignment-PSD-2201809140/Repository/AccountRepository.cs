@@ -82,6 +82,11 @@ namespace Asssignment_PSD_2201809140.Repository
             }
         }
 
+        public static Users FindUsersById(int id)
+        {
+            return tokbedDb.Users.Find(id);
+        }
+
         public static bool ifEmailExist(String email)
         {
             Users user = tokbedDb.Users.Where(User => User.Email.Equals(email)).FirstOrDefault();

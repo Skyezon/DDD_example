@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Asssignment_PSD_2201809140.Controller;
 using Asssignment_PSD_2201809140.Model;
 using Asssignment_PSD_2201809140.Repository;
 
@@ -94,8 +95,9 @@ namespace Asssignment_PSD_2201809140.View
 
         protected void loadListProduct()
         {
-            
-             Random rand = new Random();
+            ProductController productController = new ProductController();
+
+            Random rand = new Random();
              List<Products> tampilanProduct = new List<Products>();
              List<Products> kumpulanProduct = ProductRepository.GetProductList();
              Console.WriteLine(kumpulanProduct);

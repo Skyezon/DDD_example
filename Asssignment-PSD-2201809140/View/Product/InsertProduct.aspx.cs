@@ -7,13 +7,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Asssignment_PSD_2201809140.Controller;
 using Asssignment_PSD_2201809140.Model;
-using Asssignment_PSD_2201809140.Repository;
 
 namespace Asssignment_PSD_2201809140.View
 {
     public partial class InsertProduct : System.Web.UI.Page
     {
         ProductController productController = new ProductController();
+        ProductTypeController productTypeController = new ProductTypeController();
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.Form.DefaultButton = productInsertButton.UniqueID;
@@ -29,15 +29,11 @@ namespace Asssignment_PSD_2201809140.View
             {
                 Response.Redirect("../Home.aspx");
             }
-            else
-            {
-                
-            }
         }
 
         protected void fillDropdown()
         {
-            List<ProductTypes> productTypeList = ProductTypeRepository.GetProductList();
+            List<ProductTypes> productTypeList = productTypeController.GetProductList();
             List<String> productTypename = new List<string>();
 
             foreach (ProductTypes satu in productTypeList)
@@ -64,7 +60,7 @@ namespace Asssignment_PSD_2201809140.View
             if (productController.validateAll(productName, productStock, productPrice))
             {
 
-                ProductRepository.InsertProduct(productName,productStock,productPrice, ProductTypeRepository.findId(dropDownListType.SelectedItem.Value)); 
+                productController.InsertProduct(productName,productStock,productPrice, productTypeController.findId(dropDownListType.SelectedItem.Value)); 
                 Response.Redirect("ViewProduct.aspx");
             }
             else
