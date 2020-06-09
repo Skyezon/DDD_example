@@ -16,8 +16,16 @@ namespace Asssignment_PSD_2201809140.View
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
 
+            viewCartButton.Visible = false;
+            viewTransactionHistoryButton.Visible = false;
+
+            viewPaymentTypeButton.Visible = false;
+            insertPaymentTypeButton.Visible = false;
+            updatePaymentTypeButton.Visible = false;
+            viewTransactionReportButton.Visible = false;
+
+            productList.Columns[0].Visible = false;
             Users sessionUser = (Users)Session["SessionAuthUser"];
             
             if (sessionUser == null || sessionUser.Roles.Name.Equals("member"))
@@ -57,7 +65,21 @@ namespace Asssignment_PSD_2201809140.View
                 viewProductTypeButton.Visible = true;
                 insertProductTypeButton.Visible = true;
                 updateProductTypeButton.Visible = true;
+
+                viewPaymentTypeButton.Visible = true;
+                insertPaymentTypeButton.Visible = true;
+                updatePaymentTypeButton.Visible = true;
+                viewTransactionReportButton.Visible = true;
             }
+
+            if (sessionUser.Roles.Name.Equals("member"))
+            {
+                viewCartButton.Visible = true;
+                viewTransactionHistoryButton.Visible = true;
+                productList.Columns[0].Visible = true;
+
+            }
+
         }
 
         protected void viewUserButton_Click(object sender, EventArgs e)
@@ -127,6 +149,55 @@ namespace Asssignment_PSD_2201809140.View
              productList.DataBind();
         }
 
-        
+        protected void addToCartButton_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            //Get the row that contains this button
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            int rowIndex = row.RowIndex;
+
+            String productId = productList.Rows[rowIndex].Cells[1].Text;
+
+
+            Response.Redirect("Cart/InsertCart.aspx?id=" + productId);
+        }
+
+        //beberapa hal ini mungkin diganti
+
+        protected void viewCartButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Cart/ViewCart.aspx");
+        }
+
+        protected void viewTransactionHistoryButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TransactionHistory.aspx");
+
+        }
+
+        protected void viewPaymentTypeButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PaymentType/ViewPaymentType.aspx");
+
+        }
+
+        protected void insertPaymentTypeButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PaymentType/InsertPaymentType.aspx");
+
+        }
+
+        protected void updatePaymentTypeButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PaymentType/UpdatePaymentType.aspx");
+
+        }
+
+        protected void viewTransactionReportButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TransactionReport.aspx");
+
+        }
     }
 }

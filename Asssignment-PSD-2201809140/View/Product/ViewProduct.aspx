@@ -4,6 +4,11 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:GridView runat="server" ID="productList">
         <Columns>
+            <asp:TemplateField HeaderText="Add to Cart">
+                <ItemTemplate>
+                    <asp:Button runat="server" ID="addToCartButton" OnClick="addToCartButton_Click" Text="Add To Cart"/>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Update Button">
                 <ItemTemplate>
                     <asp:Button runat="server" ID="updateProductButton" OnClick="updateProductButton_Click" Text="Update Product"/>

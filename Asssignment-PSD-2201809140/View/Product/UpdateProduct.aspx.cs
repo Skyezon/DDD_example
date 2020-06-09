@@ -68,6 +68,7 @@ namespace Asssignment_PSD_2201809140.View.Product
             int productStock = Convert.ToInt32(productStockInput.Text);
             int productPrice = Convert.ToInt32(productPriceInput.Text);
             String productTypeName = dropDownListType.SelectedValue;
+         
             if (productController.validateAll(productName,productStock,productPrice))
             {
 
